@@ -1,0 +1,55 @@
+<html>
+<head>
+<style>
+*{margin:0; padding:0; font-family:'sans-serif'; box-sizing: border-box;}
+
+.container {
+	display:flex;  align-items:center; justify-content:center;
+	width:100%; min-height:100vh; background:#4F6F52; }
+
+.one, .two{width:300px; min-height:400px; border:2px dashed #fff; margin:20px;}
+.item {background:#ECE3CE;padding:10px; line-height:30px; margin:20px; height:50px; color:#111; display:flex; align-item:center; cursor:grab; }
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="one">
+		<div class="item" draggable="true">List Block 1</div>
+		<div class="item" draggable="true">List Block 2</div>
+		<div class="item" draggable="true">List Block 3</div>
+		<div class="item" draggable="true">List Block 4</div>
+		<div class="item" draggable="true">List Block 5</div>
+	
+	</div>
+	<div class="two"></div>
+</div>
+
+
+<script>
+var one = document.querySelector(".one");
+var two = document.querySelector(".two");
+var items = document.querySelectorAll(".item");
+
+for (item of items) {
+  	item.addEventListener('dragstart', function (e) {
+		let selected = e.target;
+		two.addEventListener("dragover", function (e) {
+			e.preventDefault();
+		});
+		two.addEventListener("drop", function (e) {
+			two.appendChild(selected);
+			selected = null;
+		});
+
+		one.addEventListener("dragover", function (e) {
+			e.preventDefault();
+		});
+		one.addEventListener("drop", function (e) {
+			one.appendChild(selected);
+			selected = null;
+		});
+	});
+}
+</script>
+</body>
+</html>
